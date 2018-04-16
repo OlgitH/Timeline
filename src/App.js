@@ -12,6 +12,8 @@ var data = require('./data/data.json');
 var events1 = data.events1;
 var events2 = data.events2;
 var events3 = data.events3;
+const allmonths = require('./data/months.json');
+
 
 class App extends Component {
 
@@ -19,7 +21,7 @@ class App extends Component {
     super(props);
     this.state = {
 
-      activeSlide: 1,
+      activeSlide: 'January',
       events1: events1.slides,
       events2: events2.slides,
       events3: events3.slides,
@@ -31,8 +33,14 @@ class App extends Component {
       events: {
 
       onTranslated: function(event) {
-        var elem = document.getElementById('currentMonth');
-        elem.innerHTML = events2.slideDetails.month;
+        var i;
+        for (i = 0; i < allmonths.length; i++) {
+            var elem = document.getElementById('currentMonth');
+            elem.innerHTML = allmonths[i + 1];
+            // activeSlide = events2.slideDetails.month;
+        }
+        // var elem = document.getElementById('currentMonth');
+        // elem.innerHTML = events2.slideDetails.month;
       }
       },
 
@@ -65,14 +73,7 @@ class App extends Component {
           </header>
 
           <div>
-              <OwlCarousel
-                  ref={inst => this.slider = inst}
-                  {...this.state.options}
-                  // {...this.state.events}
-                  onTranslated={this.state.events.onTranslated}
-              >
-                  {this.state.items}
-              </OwlCarousel>
+
 
 
           </div>

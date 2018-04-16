@@ -13,10 +13,7 @@ class Slide extends Component {
     };
   }
 
-
   render() {
-
-
     var eventData = this.props.events;  //recieve eventData as PROPS
     var items = [];
 
@@ -30,7 +27,6 @@ class Slide extends Component {
     var month = this.props.month;
     let classNames = 'slide';
     classNames += (' ' + month);
-
 
     return (
           <div>
@@ -48,12 +44,12 @@ class Slide extends Component {
                               </div>
                           </div>
 
-                  <div id="line"><Icon month={this.props.month} /></div>
+                  <div id="line"><Icon month={month} /></div>
               </div>
           </div>
 
-    );
-  }
+     );
+     }
 }
 
 export default Slide;
