@@ -29,20 +29,20 @@ class Slide extends Component {
     classNames += (' ' + month);
 
     return (
-          <div>
-              <div className={classNames}>
+          <div className={classNames}>
+              <div>
 
-                          <div className="row">
-                              <div className="col-md-4">
-                                {items[0]}
-                              </div>
-                              <div className="col-md-4">
-                                {items[1]}
-                              </div>
-                              <div className="col-md-4">
-                                {items[2]}
-                              </div>
-                          </div>
+
+                <div className="row">
+                  {items[0]}
+                </div>
+                <div className="row">
+                  {items[1]}
+                </div>
+                <div className="row">
+                  {items[2]}
+                </div>
+
 
                   <div id="line"><Icon month={month} /></div>
               </div>
