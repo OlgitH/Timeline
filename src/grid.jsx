@@ -4,8 +4,8 @@ class Grid extends Component {
   render() {
 
     const months = this.props.months;
-    const grid = months.map((month) =>
-    <div className="grid-unit"><span>{month}</span></div>
+    const grid = months.map((month, index) =>
+    <div className="grid-unit" key={index}><span>{month}</span></div>
   );
 
     return (

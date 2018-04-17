@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TimelineEvent from './event.jsx';
-import Moment from 'react-moment';
+import MdAutorenew from 'react-icons/lib/md/autorenew';
 import Grid from './grid.jsx';
 import './App.css';
 
@@ -26,7 +26,12 @@ class App extends Component {
 
     componentDidMount() {
         this.fetchEvents().then(this.setEvents);
+
+        document.getElementById('App').addEventListener('wheel', this.handleScroll);
+
     }
+
+
 
     fetchEvents = () => this.client.getEntries({"content_type":"timelineEvents"});
 
@@ -42,6 +47,7 @@ class App extends Component {
    }));
   }
 
+
   render() {
   const months = monthData;
   var events = this.state.events;
@@ -50,47 +56,35 @@ class App extends Component {
 
   var tEvents = events.map((event, index) =>
 
-                          <TimelineEvent
-                            key={index}
-                            title={event.fields.title}
-                            start={event.fields.startDate}
-                            end={event.fields.endDate}
-                            background={event.fields.backgroundColor}
-                            color={event.fields.color}
-                            top={event.fields.offsetTop}
-                          />
+      <TimelineEvent
+        key={index}
+        title={event.fields.title}
+        start={event.fields.startDate}
+        end={event.fields.endDate}
+        background={event.fields.backgroundColor}
+        color={event.fields.color}
+        top={event.fields.offsetTop}
+      />
 
-                      );
+  );
 
 
 
     return (
-      <div className="App">
-
-      <button id="toggleView" onClick={this.toggleView}>{this.state.isNarrow ? 'narrow view' : 'wide view'}</button>
+      <div id="App">
 
           <header>
-            <h1 className="App-title">Timeline</h1>
+            <h1 className="App-title">Timeline</h1> <div id="demo"><p></p></div>
+            <button id="toggleView" onClick={this.toggleView}>{this.state.isNarrow ? <MdAutorenew /> : <MdAutorenew />}</button>
+
           </header>
 
-          <div className={"wrapper " + (this.state.isNarrow ? 'narrow' : 'wide')}>
-              <div className="horizontal-scroll">
+          <div id="timeline-container" className={"wrapper " + (this.state.isNarrow ? 'narrow' : 'wide')}>
+              <div id="horizontal-scroll">
                 <Grid months={months} />
                 {tEvents}
-                {/* <TimelineEvent title="Jim's Report" start="80" end="120" background="red" color="#fff" top="20"/>
-                <TimelineEvent title="Another one" start="60" end="86" background="orange" color="#fff" top="0"/>
-                <TimelineEvent title="MySupport" start="25" end="39" background="blue" color="#fff" top="40"/>
-                <TimelineEvent title="Another Project" start="40" end="50" background="blue" color="#fff" top="60"/>
-
-                <TimelineEvent title="Password Self Selfice" start="140" end="250" background="pink" color="#00" top="20"/>
-                <TimelineEvent title="Poster Refresh" start="220" end="250" background="green" color="#000" top="60"/> */}
               </div>
           </div>
-
-
-
-
-
 
       </div>
 

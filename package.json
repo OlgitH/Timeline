@@ -4,13 +4,12 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.0",
-    "interact.js": "^1.2.8",
     "jquery": "^3.3.1",
     "moment": "^2.22.1",
     "react": "^16.3.1",
-    "react-calendar-timeline": "^0.15.10",
     "react-dom": "^16.3.1",
     "react-event-timeline": "^1.5.1",
+    "react-icons": "^2.2.7",
     "react-moment": "^0.7.0",
     "react-scripts": "1.1.4"
   },
