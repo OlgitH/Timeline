@@ -11,15 +11,33 @@ class TimelineEvent extends Component {
 
   render() {
 
-  const totaldays = 365 / 12;
-  const start = this.props.start;
-  const end = this.props.end;
+    // for (i = 0; i < events.length; i++) {
+    //
+    //    var startDate = new Date(events[i].fields.startDate);
+    //    var yearStart = new Date(startDate.getFullYear(), 0, 0);
+    //    var diff = startDate - yearStart;
+    //    var oneDay = 1000 * 60 * 60 * 24;
+    //    var day = Math.floor(diff / oneDay);
+    // }
 
-  const duration = (end - start); //number of days spent on project
-  const percentage = (duration / 365) * 100;
+  // const totaldays = 365 / 12;
 
-  const leftIndent = (start / 365) * 100; //number of days into the year converted to a precentage of the year
+  const startDate = new Date(this.props.start);
+  const endDate = new Date(this.props.end);
+  const yearStart = new Date(startDate.getFullYear(), 0, 0);
 
+  const numberOfDays = endDate - startDate;
+  const daysToStartDate = startDate - yearStart;
+  const oneDay = 1000 * 60 * 60 * 24;
+
+  const durationToStart = Math.floor(daysToStartDate / oneDay);
+  const projectDuration = Math.floor(numberOfDays / oneDay);
+
+
+  // const duration = (endDate - startDate);
+
+  const percentage = (projectDuration / 365) * 100;
+  const leftIndent = (durationToStart / 365) * 100; //number of days into the year converted to a precentage of the year
 
   const vertPos = this.props.top;
   const bgColor = this.props.background;
@@ -32,7 +50,7 @@ class TimelineEvent extends Component {
             <div className="timeline-event" style={style}>
               <h3>{this.props.title}</h3>
               <p>{this.props.description}</p>
-              <span className="days">{duration} Days</span>
+              <span className="days">{projectDuration} Days</span>
             </div>
         </div>
 

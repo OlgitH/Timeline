@@ -14,6 +14,10 @@ header {
   width: 100vw;
   overflow: auto; }
 
+#toggleView {
+  position: fixed;
+  top: 80px; }
+
 .timeline-event {
   text-align: left;
   padding: 1em;
@@ -34,6 +38,8 @@ header {
 .wrapper {
   width: 500vw;
   position: relative; }
+  .wrapper.narrow {
+    width: 100vw; }
 
 /*Slides*/
 .grid-container {
@@ -55,6 +61,8 @@ header {
     bottom: 0;
     color: #222;
     font-size: 1.8rem; }
+    .narrow .grid-unit span {
+      font-size: 1.2rem; }
 
 .slide {
   width: auto;

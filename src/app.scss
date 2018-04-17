@@ -29,6 +29,11 @@ header {
   overflow:auto;
 }
 
+#toggleView {
+  position:fixed;
+  top:80px;
+}
+
 .timeline-event {
 text-align:left;
 padding:1em;
@@ -49,6 +54,10 @@ z-index:1;
 .wrapper {
   width: 500vw;
   position:relative;
+
+  &.narrow {
+  width: 100vw;
+  }
 }
 /*Slides*/
 
@@ -70,6 +79,9 @@ z-index:1;
     bottom:0;
     color:#222;
     font-size:1.8rem;
+    .narrow & {
+      font-size:1.2rem;
+    }
   }
 }
 .slide {
