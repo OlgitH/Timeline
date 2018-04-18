@@ -1,5 +1,5 @@
 header {
-  position: fixed;
+  position: absolute;
   height: 80px;
   width: 100%;
   background-color: #222;
@@ -30,14 +30,19 @@ header {
   position: relative; }
   .wrapper.narrow {
     width: 100vw; }
+    .wrapper.narrow .timeline-event {
+      height: 40px;
+      padding: 0.5em 1em; }
   .wrapper #horizontal-scroll {
-    margin-top: 100px;
+    margin-top: 80px;
     width: 100%;
-    height: calc((100vh - 80px) - 40px); }
+    height: calc(100vh - 80px); }
     .wrapper #horizontal-scroll::after {
       clear: both;
       content: "";
       display: block; }
+  .wrapper .whiteText span {
+    color: #fff !important; }
   .wrapper .timeline-event {
     text-align: left;
     padding: 1em;
@@ -50,8 +55,19 @@ header {
       color: #222;
       width: 200px;
       padding: 10px; }
+    .wrapper .timeline-event .dropdownWrap {
+      position: relative;
+      clear: both; }
     .wrapper .timeline-event .labelArea {
       z-index: 0; }
+      .wrapper .timeline-event .labelArea span.arrow {
+        font-size: 30px;
+        cursor: pointer;
+        position: absolute;
+        top: 16px;
+        left: 80px; }
+        .wrapper .timeline-event .labelArea span.arrow .detailBox {
+          font-size: 20px; }
     .wrapper .timeline-event.offScreen .labelArea {
       position: fixed;
       left: 10px; }
@@ -63,15 +79,31 @@ header {
       position: relative;
       color: #fff;
       z-index: 1; }
+    .wrapper .timeline-event .showDetails, .wrapper .timeline-event .days {
+      float: left; }
+
+/*featureBox*/
+#featureBox {
+  padding: 0;
+  position: absolute;
+  top: 80px;
+  right: 0; }
+  #featureBox.text {
+    width: 600px;
+    padding: 10px;
+    background: #fff; }
 
 /* Background grid*/
 .grid-container {
-  position: absolute;
   left: 0;
   top: 0;
   height: 100%;
   width: 100%;
-  z-index: -1; }
+  z-index: -1;
+  background-color: #fff;
+  -webkit-transition: background-color 1s;
+  /* Safari */
+  transition: background-color 1s; }
   .grid-container .grid-unit {
     width: calc(8.3333333333% - 21.6666666667px);
     float: left;

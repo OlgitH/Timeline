@@ -9,7 +9,7 @@ $neat-grid: (
 
 
 header {
-  position:fixed;
+  position:absolute;
   height:80px;
   width:100%;
   background-color: #222;
@@ -48,13 +48,21 @@ header {
 
   &.narrow {
   width: 100vw;
+  .timeline-event {
+    height:40px;
+    padding:0.5em 1em;
+  }
   }
 
   #horizontal-scroll {
-    margin-top:100px;
+    margin-top:80px;
     @include grid-container;
     width: 100%;
-    height: calc((100vh - 80px) - 40px);
+    height: calc(100vh - 80px);
+  }
+
+  .whiteText span {
+    color:#fff!important;
   }
 
   .timeline-event {
@@ -71,9 +79,24 @@ header {
           width:200px;
           padding:10px;
         }
+        .dropdownWrap {
+          position:relative;
+          clear:both;
+        }
 
         .labelArea {
           z-index:0;
+
+          span.arrow {
+            font-size:30px;
+            cursor:pointer;
+            position:absolute;
+            top:16px;
+            left:80px;
+            .detailBox {
+              font-size:20px;
+            }
+          }
         }
 
         &.offScreen {
@@ -96,21 +119,42 @@ header {
           color:#fff;
           z-index:1;
         }
+        .showDetails, .days {
+          float:left;
+        }
 
   }
 
 }
 
+/*featureBox*/
+#featureBox {
+  padding:0;
+  position:absolute;
+  top:80px;
+  right:0;
+  &.video {
+  }
+  &.text {
+    width:600px;
+    padding:10px;
+    background:#fff;
+  }
+}
 
 /* Background grid*/
 
 .grid-container {
-  position:absolute;
+  // position:absolute;
   left:0;
   top:0;
   height:100%;
   width:100%;
   z-index:-1;
+  background-color: #fff;
+  -webkit-transition: background-color 1s; /* Safari */
+  transition: background-color 1s;
+
 
   .grid-unit {
     @include grid-column(1);
@@ -125,6 +169,7 @@ header {
       .narrow & {
         font-size:1.2rem;
       }
+
     }
   }
 

@@ -10,7 +10,6 @@ class TimelineEvent extends Component {
    this.state = {
     boxIsShowing: false
    };
-   this.handleScroll = this.handleScroll.bind(this)
  }
 
  componentDidMount() {
@@ -18,31 +17,14 @@ class TimelineEvent extends Component {
      document.getElementById('App').addEventListener('scroll', this.handleScroll);
  }
 
- componentWillUnmount() {
-     document.getElementById('App').removeEventListener('wheel', this.handleScroll);
- }
-
- handleScroll(e) {
-   const app = document.getElementById('App');
-   var scrollPos = app.scrollLeft;
-   console.log(scrollPos);
-   // if scrollPos >=
-
-   var timelineEvents = document.getElementsByClassName('timeline-event');
-   var i;
-   for (i = 0; i < timelineEvents.length; i++) {
-       var rect = timelineEvents[i].getBoundingClientRect();
-       console.log('rect ' + rect.right + 'px');
-       if (rect.left <= 0 || rect.right >= 0) {
-         timelineEvents[i].classList.add('offScreen');
-       }
-       if (rect.left >= 0 || rect.right <= 160 ) {
-         timelineEvents[i].classList.remove('offScreen');
-       }
-   }
- }
-
  handleClick(e) {
+   const toggled = document.getElementsByClassName('detailBox');
+   var i;
+    for (i = 0; i < toggled.length; i++) {
+      if ( !this.state.boxIsShowing ) {
+        toggled[i].style.display = "none";
+      }
+    }
    this.setState({
      boxIsShowing: !this.state.boxIsShowing,
    })
@@ -77,25 +59,27 @@ class TimelineEvent extends Component {
 
   const width = percentage + '%';
 
-  const style = {position:'absolute', color:color, background: bgColor, width: width, left:leftIndent+'%', top: vertPos + '%'};
-
+  const style = {position:'absolute', color:color, background: bgColor, width: width, left: leftIndent +'%', top: vertPos + '%'};
+  const arrow =   <span className="showDetails" onClick={this.handleClick.bind(this)}> { this.state.boxIsShowing ? <FaAngleUp /> : <FaAngleDown />}
+    { this.state.boxIsShowing ?
+      <div className={ this.state.boxIsShowing ? 'detailBox toggled' : 'detailBox' }>
+        Project start:<br />
+        <Moment format='LL'>{this.props.start}</Moment><br /><br />
+        Project end:<br />
+        <Moment format='LL'>{this.props.end}</Moment>
+      </div>
+      : ''
+    }
+  </span>;
     return (
         <div>
             <div className="timeline-event" style={style} >
               <div className="labelArea">
+                  <div className="dropdownWrap">
                   <h3>{this.props.title}</h3>
-                  <span className="days">{projectDuration} Days</span>
-                  <span className="showDetails" onClick={this.handleClick.bind(this)}> { this.state.boxIsShowing ? <FaAngleUp /> : <FaAngleDown />}
-                  { this.state.boxIsShowing ?
-                    <div className={ this.state.boxIsShowing ? 'detailBox toggled' : 'detailBox' }>
-                      Project start:<br />
-                      <Moment format='LL'>{this.props.start}</Moment><br /><br />
-                      Project end:<br />
-                      <Moment format='LL'>{this.props.end}</Moment>
-                    </div>
-                    : ''
-                  }
-                  </span>
+                  { !this.props.isNarrow ? <span className="days">{projectDuration} Days</span> : ''}
+                  { !this.props.isNarrow ? <span className="arrow">{arrow}</span > : ''}
+                  </div>
               </div>
 
             </div>

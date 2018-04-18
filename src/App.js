@@ -14,9 +14,12 @@ class App extends Component {
     super(props);
     this.state = {
       isNarrow: false,
+      videoBoxIsShowing: false,
+      textBoxIsShowing: false,
       events: []
     };
     this.toggleView = this.toggleView.bind(this)
+    this.handleScroll = this.handleScroll.bind(this)
   }
 
   client = contentful.createClient({
@@ -26,9 +29,11 @@ class App extends Component {
 
     componentDidMount() {
         this.fetchEvents().then(this.setEvents);
+        document.getElementById('App').addEventListener('scroll', this.handleScroll);
+    }
 
-        document.getElementById('App').addEventListener('wheel', this.handleScroll);
-
+    componentWillUnmount() {
+        document.getElementById('App').removeEventListener('scroll', this.handleScroll);
     }
 
 
@@ -45,6 +50,56 @@ class App extends Component {
     this.setState(prevState => ({
      isNarrow: !prevState.isNarrow
    }));
+   const app = document.getElementById('App');
+   app.scrollLeft = 0;
+  }
+
+  handleScroll() {
+    const app = document.getElementById('App');
+    var scrollPos = app.scrollLeft;
+    console.log(scrollPos);
+    const grid = document.getElementsByClassName('grid-container')[0];
+    const labels = document.getElementsByClassName('grid-label');
+    if (scrollPos >= 100 && scrollPos <= 2000) {
+      this.setState({
+       videoBoxIsShowing: true
+     });
+        grid.style.backgroundColor = "#222";
+        grid.classList.add('whiteText');
+    } else if (scrollPos >= 3000 && scrollPos <= 3600) {
+        grid.style.backgroundColor = "#fff200";
+        this.setState({
+         textBoxIsShowing: true
+       });
+       grid.classList.remove('whiteText');
+       document.getElementById('featureBox').innerHTML = '<h2>Julie Dark Takes over</h2>';
+    } else if (scrollPos >= 4000 && scrollPos <= 6000) {
+        grid.style.backgroundColor = "#ccc";
+        this.setState({
+         textBoxIsShowing: true
+       });
+       grid.classList.remove('whiteText');
+    } else {
+        grid.style.backgroundColor = "#fff";
+        this.setState({
+         videoBoxIsShowing: false,
+         textBoxIsShowing: false
+       });
+       grid.classList.remove('whiteText');
+    }
+
+    var timelineEvents = document.getElementsByClassName('timeline-event');
+    var i;
+    for (i = 0; i < timelineEvents.length; i++) {
+        var rect = timelineEvents[i].getBoundingClientRect();
+        // console.log('rect ' + rect.right + 'px');
+        if (rect.left <= 0 || rect.right >= 0) {
+          timelineEvents[i].classList.add('offScreen');
+        }
+        if (rect.left >= 0 || rect.right <= 160 ) {
+          timelineEvents[i].classList.remove('offScreen');
+        }
+    }
   }
 
 
@@ -55,7 +110,6 @@ class App extends Component {
   var i;
 
   var tEvents = events.map((event, index) =>
-
       <TimelineEvent
         key={index}
         title={event.fields.title}
@@ -64,10 +118,9 @@ class App extends Component {
         background={event.fields.backgroundColor}
         color={event.fields.color}
         top={event.fields.offsetTop}
+        isNarrow={this.state.isNarrow}
       />
-
   );
-
 
 
     return (
@@ -85,6 +138,9 @@ class App extends Component {
                 {tEvents}
               </div>
           </div>
+
+          {this.state.videoBoxIsShowing ? <div id="featureBox" className="video"><iframe src="https://player.vimeo.com/video/184997428?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>: ''}
+          {this.state.textBoxIsShowing ? <div id="featureBox" className="text"><h2>We have completed 300 projects and helped logged a million calls.</h2></div>: ''}
 
       </div>
 
