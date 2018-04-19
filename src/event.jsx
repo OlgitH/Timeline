@@ -32,27 +32,30 @@ class TimelineEvent extends Component {
 
   render() {
 
-  //Date stuff
+  //DATE STUFF
+  //Timeframe variables
+  const timeframeStartDate = new Date(2018, 5, 1, 0, 0, 0); //month is month before for some reason -e.g. 5 = June  10=November
+  const timeframeEnd = new Date(2019, 10, 1, 0, 0, 0);
+  const timeframe = timeframeEnd - timeframeStartDate;
 
-  const startDate = new Date(this.props.start);
-  const endDate = new Date(this.props.end);
-  const yearStart = new Date(startDate.getFullYear(), 0, 0);
+  //Project date variables -  All dates in JS are in as milliseconds from January 1, 1970
+  const projectStartDate = new Date(this.props.start);
+  const projectEndDate = new Date(this.props.end);
+  const projectLength = projectEndDate - projectStartDate;
+  const msToStartDate = projectStartDate - timeframeStartDate; // in milliseconds
 
-  const numberOfDays = endDate - startDate;
-  const daysToStartDate = startDate - yearStart;
-  const oneDay = 1000 * 60 * 60 * 24;
+  const oneDay = 1000 * 60 * 60 * 24; // Day in milliseconds
 
-  const durationToStart = Math.floor(daysToStartDate / oneDay); // number of days to project sart from the beginning of the year
-  const projectDuration = Math.floor(numberOfDays / oneDay); // number of days the project lasts
+  const timeframeDays = Math.floor(timeframe / oneDay); // number of days to project sart from the beginning of the year
+  const daysToStart = Math.floor(msToStartDate / oneDay); // number of days to project sart from the beginning of the year
+  const projectDuration = Math.floor(projectLength / oneDay); // number of days the project lasts
 
-
-  // convert number of days to percentages of total number of days in year
-
-  const percentage = (projectDuration / 365) * 100;
-  const leftIndent = (durationToStart / 365) * 100; //number of days into the year converted to a precentage of the year
+  //Convert days to percentages
+  const percentage = (projectDuration / timeframeDays) * 100;
+  const leftIndent = (daysToStart / timeframeDays) * 100; //number of days into the year converted to a precentage of the year
+  console.log('timeframeDays' + timeframeDays);
 
   //other props
-
   const vertPos = this.props.top;
   const bgColor = this.props.background;
   const color = this.props.color;
