@@ -49,11 +49,11 @@ class TimelineEvent extends Component {
   const timeframeDays = Math.floor(timeframe / oneDay); // number of days to project sart from the beginning of the year
   const daysToStart = Math.floor(msToStartDate / oneDay); // number of days to project sart from the beginning of the year
   const projectDuration = Math.floor(projectLength / oneDay); // number of days the project lasts
+  console.log('timeframeDays' + daysToStart );
 
   //Convert days to percentages
   const percentage = (projectDuration / timeframeDays) * 100;
   const leftIndent = (daysToStart / timeframeDays) * 100; //number of days into the year converted to a precentage of the year
-  console.log('timeframeDays' + timeframeDays);
 
   //other props
   const vertPos = this.props.top;
@@ -62,7 +62,7 @@ class TimelineEvent extends Component {
 
   const width = percentage + '%';
 
-  const style = {position:'absolute', color:color, background: bgColor, width: width, left: leftIndent +'%', top: vertPos + '%'};
+  const style = {position:'absolute', color:color, background:bgColor, width:width, marginLeft:leftIndent +'%', top:vertPos + '%'};
   const arrow =   <span className="showDetails" onClick={this.handleClick.bind(this)}> { this.state.boxIsShowing ? <FaAngleUp /> : <FaAngleDown />}
     { this.state.boxIsShowing ?
       <div className={ this.state.boxIsShowing ? 'detailBox toggled' : 'detailBox' }>
@@ -80,8 +80,8 @@ class TimelineEvent extends Component {
               <div className="labelArea">
                   <div className="dropdownWrap">
                   <h3>{this.props.title}</h3>
-                  { !this.props.isNarrow ? <span className="days">{projectDuration} Days</span> : ''}
-                  { !this.props.isNarrow ? <span className="arrow">{arrow}</span > : ''}
+                  { !this.props.isNarrow ? <span className="days">{projectDuration} Days</span> : '' }
+                  { !this.props.isNarrow ? <span className="arrow">{arrow}</span > : '' }
                   </div>
               </div>
 

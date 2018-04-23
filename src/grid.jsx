@@ -5,7 +5,7 @@ class Grid extends Component {
 
     const months = this.props.months;
     const grid = months.map((month, index) =>
-    <div className="grid-unit" key={index}><span className="grid-label">{month}</span></div>
+    <div className="grid-unit" key={index}></div>
   );
 
     return (

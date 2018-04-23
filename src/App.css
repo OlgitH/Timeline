@@ -36,7 +36,11 @@ header {
   .wrapper #horizontal-scroll {
     margin-top: 80px;
     width: 100%;
-    height: calc(100vh - 80px); }
+    height: calc(100vh - 80px);
+    background-image: url("images/calendar.svg");
+    background-repeat: no-repeat;
+    background-position: -5px bottom;
+    background-size: 100%; }
     .wrapper #horizontal-scroll::after {
       clear: both;
       content: "";
@@ -95,8 +99,9 @@ header {
 
 /* Background grid*/
 .grid-container {
+  position: absolute;
   left: 0;
-  top: 0;
+  bottom: 0;
   height: 100%;
   width: 100%;
   z-index: -1;

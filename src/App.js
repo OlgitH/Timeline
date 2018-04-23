@@ -60,32 +60,33 @@ class App extends Component {
     console.log(scrollPos);
     const grid = document.getElementsByClassName('grid-container')[0];
     const labels = document.getElementsByClassName('grid-label');
-    if (scrollPos >= 100 && scrollPos <= 2000) {
-      this.setState({
-       videoBoxIsShowing: true
-     });
-        grid.style.backgroundColor = "#222";
-        grid.classList.add('whiteText');
-    } else if (scrollPos >= 3000 && scrollPos <= 3600) {
-        grid.style.backgroundColor = "#fff200";
+    // if (scrollPos >= 100 && scrollPos <= 2000) {
+    //   this.setState({
+    //    videoBoxIsShowing: true
+    //  });
+        // grid.style.backgroundColor = "#222";
+        // grid.classList.add('whiteText');
+    // } else
+    if (scrollPos >= 3000 && scrollPos <= 3600) {
+        // grid.style.backgroundColor = "#fff200";
         this.setState({
          textBoxIsShowing: true
        });
-       grid.classList.remove('whiteText');
+       // grid.classList.remove('whiteText');
        document.getElementById('featureBox').innerHTML = '<h2>Julie Dark Takes over</h2>';
     } else if (scrollPos >= 4000 && scrollPos <= 6000) {
-        grid.style.backgroundColor = "#ccc";
+        // grid.style.backgroundColor = "#ccc";
         this.setState({
          textBoxIsShowing: true
        });
-       grid.classList.remove('whiteText');
+       // grid.classList.remove('whiteText');
     } else {
-        grid.style.backgroundColor = "#fff";
+        // grid.style.backgroundColor = "#fff";
         this.setState({
          videoBoxIsShowing: false,
          textBoxIsShowing: false
        });
-       grid.classList.remove('whiteText');
+       // grid.classList.remove('whiteText');
     }
 
     var timelineEvents = document.getElementsByClassName('timeline-event');

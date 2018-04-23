@@ -59,6 +59,10 @@ header {
     @include grid-container;
     width: 100%;
     height: calc(100vh - 80px);
+    background-image:url('images/calendar.svg');
+    background-repeat:no-repeat;
+    background-position: -5px bottom;
+    background-size: 100%;
   }
 
   .whiteText span {
@@ -145,9 +149,9 @@ header {
 /* Background grid*/
 
 .grid-container {
-  // position:absolute;
+  position:absolute;
   left:0;
-  top:0;
+  bottom:0;
   height:100%;
   width:100%;
   z-index:-1;
@@ -155,11 +159,14 @@ header {
   -webkit-transition: background-color 1s; /* Safari */
   transition: background-color 1s;
 
+  // background-size:100%;
+
 
   .grid-unit {
     @include grid-column(1);
     height:100%;
     // background:#daffa8;
+    // border-left:1px solid #e9e9e9;
     position:relative;
     span {
       position:absolute;
