@@ -35,7 +35,7 @@ class TimelineEvent extends Component {
   //DATE STUFF
   //Timeframe variables
   const timeframeStartDate = new Date(2018, 5, 1, 0, 0, 0); //month is month before for some reason -e.g. 5 = June  10=November
-  const timeframeEnd = new Date(2019, 10, 1, 0, 0, 0);
+  const timeframeEnd = new Date(2019, 10, 30, 0, 0, 0);
   const timeframe = timeframeEnd - timeframeStartDate;
 
   //Project date variables -  All dates in JS are in as milliseconds from January 1, 1970
@@ -62,7 +62,7 @@ class TimelineEvent extends Component {
 
   const width = percentage + '%';
 
-  const style = {position:'absolute', color:color, background:bgColor, width:width, marginLeft:leftIndent +'%', top:vertPos + '%'};
+  const style = {position:'absolute', borderTop: '10px solid',  borderColor: bgColor, width:width, left:leftIndent +'%', top:vertPos + '%'};
   const arrow =   <span className="showDetails" onClick={this.handleClick.bind(this)}> { this.state.boxIsShowing ? <FaAngleUp /> : <FaAngleDown />}
     { this.state.boxIsShowing ?
       <div className={ this.state.boxIsShowing ? 'detailBox toggled' : 'detailBox' }>

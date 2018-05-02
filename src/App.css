@@ -1,13 +1,17 @@
+body {
+  height: calc(100vh - 80px); }
+
 header {
   position: absolute;
   height: 80px;
   width: 100%;
-  background-color: #222;
+  background-color: #ffcb05;
   padding: 20px;
   color: #fff;
   text-align: center; }
   header .App-title {
-    font-size: 1.5em; }
+    font-size: 1.5em;
+    color: #222; }
 
 /* Custom Stuff */
 #App {
@@ -27,20 +31,23 @@ header {
 /* The Timeline */
 .wrapper {
   width: 500vw;
-  position: relative; }
+  position: relative;
+  background-image: url("images/calendar.svg");
+  background-repeat: no-repeat;
+  background-position: -5px bottom;
+  background-size: 100%; }
   .wrapper.narrow {
-    width: 100vw; }
+    width: 100vw;
+    background-image: url("images/calendar-narrow.svg"); }
     .wrapper.narrow .timeline-event {
       height: 40px;
-      padding: 0.5em 1em; }
+      padding: 0.5em 0; }
+      .wrapper.narrow .timeline-event h3 {
+        font-size: 1rem; }
   .wrapper #horizontal-scroll {
     margin-top: 80px;
     width: 100%;
-    height: calc(100vh - 80px);
-    background-image: url("images/calendar.svg");
-    background-repeat: no-repeat;
-    background-position: -5px bottom;
-    background-size: 100%; }
+    height: calc(100vh - 80px); }
     .wrapper #horizontal-scroll::after {
       clear: both;
       content: "";
@@ -50,10 +57,10 @@ header {
   .wrapper .timeline-event {
     text-align: left;
     padding: 1em;
-    background: #e9e9e9;
+    background: #fff;
+    color: #222;
     margin: 0;
-    border-radius: 40px;
-    height: 80px; }
+    height: 40px; }
     .wrapper .timeline-event .detailBox {
       background: #f6f6f6;
       color: #222;
@@ -110,7 +117,7 @@ header {
   /* Safari */
   transition: background-color 1s; }
   .grid-container .grid-unit {
-    width: calc(5.5555555556%);
+    width: calc(5.8823529412%);
     float: left;
     margin-left: 0px;
     height: 100%;

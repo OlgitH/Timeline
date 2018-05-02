@@ -135,7 +135,7 @@ class App extends Component {
 
           <div id="timeline-container" className={"wrapper " + (this.state.isNarrow ? 'narrow' : 'wide')}>
               <div id="horizontal-scroll">
-                <Grid months={months} />
+                {/* <Grid months={months} /> */}
                 {tEvents}
               </div>
           </div>
